@@ -50,13 +50,17 @@
                         </td>
                     </tr>
                     @endforeach
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+<div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <button style="background-color: red;" wire:click.prevent="deleteSE"
         onclick="confirm('Are you sure?') || event.stopImmediatePropagation()"
         class="@if ($bulkDisabled) opacity-50 @endif bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
     Delete Selected
-</button>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+				</button>
+				</div>
