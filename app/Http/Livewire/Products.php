@@ -4,11 +4,16 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\WithPagination;
 use App\Models\Product;
 
 class Products extends Component
 {
+    use WithPagination;
     use WithFileUploads;
+    public $selectedUser = [];
+
+    public $bulkDisabled = true;
 	public $products, $name, $amount, $product_upc, $product_id, $image;
     public $isModalOpen = 0;
     public function render()
@@ -75,7 +80,15 @@ class Products extends Component
     
     public function delete($id)
     {
-        Student::find($id)->delete();
+        Product::find($id)->delete();
         session()->flash('message', 'Product deleted.');
+    }
+
+    public function deleteSE()
+    {
+        Product::query()
+            ->whereIn('id', $this->selectedUser)
+            ->delete();
+        $this->selectedUser = [];
     }
 }

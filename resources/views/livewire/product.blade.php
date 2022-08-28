@@ -21,10 +21,11 @@
             @if($isModalOpen)
             @include('livewire.create')
             @endif
+
             <table class="table-fixed w-full">
                 <thead>
                     <tr class="bg-gray-100">
-                        <th class="px-4 py-2 w-20">No.</th>
+                        <th class="px-4 py-2 w-20">#</th>
                         <th class="px-4 py-2">Name</th>
                         <th class="px-4 py-2">Price</th>
                         <th class="px-4 py-2">UTS</th>
@@ -34,7 +35,10 @@
                 <tbody>
                     @foreach($products as $product)
                     <tr>
-                        <td class="border px-4 py-2">{{ $product->id }}</td>
+                        <td class="border px-4 py-2"> <label class="custom-checkbox">
+                        <input type="checkbox" wire:model="selectedUser" value="{{ $product->id }}">
+                        <span></span>
+                    </label></td>
                         <td class="border px-4 py-2">{{ $product->name }}</td>
                         <td class="border px-4 py-2">{{ $product->amount}}</td>
                         <td class="border px-4 py-2">{{ $product->product_upc}}</td>
@@ -46,6 +50,11 @@
                         </td>
                     </tr>
                     @endforeach
+                    <button style="background-color: red;" wire:click.prevent="deleteSE"
+        onclick="confirm('Are you sure?') || event.stopImmediatePropagation()"
+        class="@if ($bulkDisabled) opacity-50 @endif bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+    Delete Selected
+</button>
                 </tbody>
             </table>
         </div>
