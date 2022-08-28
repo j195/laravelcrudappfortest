@@ -45,14 +45,14 @@ class Products extends Component
             'name' => 'required',
             'amount' => 'required',
             'product_upc' => 'required',
-            'image' => 'required',
+            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
-    
+        $filename = $this->image->store('photos');
         Product::updateOrCreate(['id' => $this->product_id], [
             'name' => $this->name,
             'amount' => $this->amount,
             'product_upc' => $this->product_upc,
-            'image' => $this->image,
+            'image' => $filename,
         ]);
  
         session()->flash('message', $this->product_id ? 'Product updated.' : 'Product created.');
